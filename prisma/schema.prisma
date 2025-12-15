@@ -1,11 +1,14 @@
+
 datasource db {
   provider = "mongodb"
   url      = env("MONGODB_URI")
 }
+
 generator client {
   provider = "prisma-client-js"
   output   = "./generated/client"
 }
+
 enum TenantRole {
   OWNER
   ADMIN
@@ -13,7 +16,7 @@ enum TenantRole {
 }
 
 model User {
-  id        String       @id @default(cuid())
+  id        String       @id @default(cuid()) @map("_id") // FIXED
   email     String       @unique
   password  String
   name      String?
@@ -24,7 +27,7 @@ model User {
 }
 
 model Tenant {
-  id          String       @id @default(cuid())
+  id          String       @id @default(cuid()) @map("_id") // FIXED
   name        String
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
@@ -38,7 +41,7 @@ model Tenant {
 }
 
 model TenantUser {
-  id        String     @id @default(cuid())
+  id        String     @id @default(cuid()) @map("_id") // FIXED
   role      TenantRole
   userId    String
   tenantId  String
@@ -51,7 +54,7 @@ model TenantUser {
 }
 
 model AppConfig {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("_id") // FIXED
   tenantId  String
   version   Int      @default(1)
   json      Json
@@ -61,7 +64,7 @@ model AppConfig {
 }
 
 model PushDevice {
-  id          String   @id @default(cuid())
+  id          String   @id @default(cuid()) @map("_id") // FIXED
   tenantId    String
   userId      String?
   deviceToken String
@@ -76,7 +79,7 @@ model PushDevice {
 }
 
 model PushCampaign {
-  id              String   @id @default(cuid())
+  id              String   @id @default(cuid()) @map("_id") // FIXED
   tenantId        String
   title           String
   body            String
@@ -91,7 +94,7 @@ model PushCampaign {
 }
 
 model Event {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("_id") // FIXED
   tenantId  String
   userId    String?
   type      String
@@ -104,7 +107,7 @@ model Event {
 }
 
 model AuditLog {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("_id") // FIXED
   tenantId  String?
   userId    String?
   action    String
