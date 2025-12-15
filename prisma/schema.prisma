@@ -1,4 +1,3 @@
-
 datasource db {
   provider = "mongodb"
   url      = env("MONGODB_URI")
@@ -16,7 +15,7 @@ enum TenantRole {
 }
 
 model User {
-  id        String       @id @default(cuid()) @map("_id") // FIXED
+  id        String       @id @default(cuid()) @map("_id")
   email     String       @unique
   password  String
   name      String?
@@ -27,7 +26,7 @@ model User {
 }
 
 model Tenant {
-  id          String       @id @default(cuid()) @map("_id") // FIXED
+  id          String       @id @default(cuid()) @map("_id")
   name        String
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
@@ -41,7 +40,7 @@ model Tenant {
 }
 
 model TenantUser {
-  id        String     @id @default(cuid()) @map("_id") // FIXED
+  id        String     @id @default(cuid()) @map("_id")
   role      TenantRole
   userId    String
   tenantId  String
@@ -54,7 +53,7 @@ model TenantUser {
 }
 
 model AppConfig {
-  id        String   @id @default(cuid()) @map("_id") // FIXED
+  id        String   @id @default(cuid()) @map("_id")
   tenantId  String
   version   Int      @default(1)
   json      Json
@@ -64,7 +63,7 @@ model AppConfig {
 }
 
 model PushDevice {
-  id          String   @id @default(cuid()) @map("_id") // FIXED
+  id          String   @id @default(cuid()) @map("_id")
   tenantId    String
   userId      String?
   deviceToken String
@@ -79,7 +78,7 @@ model PushDevice {
 }
 
 model PushCampaign {
-  id              String   @id @default(cuid()) @map("_id") // FIXED
+  id              String   @id @default(cuid()) @map("_id")
   tenantId        String
   title           String
   body            String
@@ -94,7 +93,7 @@ model PushCampaign {
 }
 
 model Event {
-  id        String   @id @default(cuid()) @map("_id") // FIXED
+  id        String   @id @default(cuid()) @map("_id")
   tenantId  String
   userId    String?
   type      String
@@ -107,7 +106,7 @@ model Event {
 }
 
 model AuditLog {
-  id        String   @id @default(cuid()) @map("_id") // FIXED
+  id        String   @id @default(cuid()) @map("_id")
   tenantId  String?
   userId    String?
   action    String
